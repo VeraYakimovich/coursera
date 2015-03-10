@@ -7,5 +7,12 @@ ds <- read.table(text = grep("^[1,2]/2/2007", readLines(filepath), value = TRUE)
 ## Converting dates
 ds$Datetime <- as.POSIXct(strptime(paste(ds$Date, ds$Time), "%d/%m/%Y %H:%M:%S"))
 
+#  Open the PNG graphics device to create a file
+png(filename = "plot1.png",
+    width = 480, height = 480, units = "px")
+
 # Generating Plot 1
 hist(ds$Global_active_power, col = "red", main = paste("Global Active Power"), xlab = "Global Active Power (kilowatts)", ylab ="Frequency" )
+
+#Closing the device
+dev.off()

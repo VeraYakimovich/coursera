@@ -7,6 +7,10 @@ ds <- read.table(text = grep("^[1,2]/2/2007", readLines(filepath), value = TRUE)
 ## Converting dates
 ds$Datetime <- as.POSIXct(strptime(paste(ds$Date, ds$Time), "%d/%m/%Y %H:%M:%S"))
 
+##  Open the PNG graphics device to create a file
+png(filename = "plot1.png",
+    width = 480, height = 480, units = "px")
+
 ## Generating Plot 4
 par(mfrow = c(2,2), mar = c(4,4,2,1), oma = c(0,0,2,0))
 with(ds, {
@@ -23,3 +27,7 @@ with(ds, {
   plot(Global_reactive_power ~ Datetime, type = "l", 
        ylab = "Global_rective_power", xlab = "datetime")
 })
+
+#Closing the device
+dev.off()
+
